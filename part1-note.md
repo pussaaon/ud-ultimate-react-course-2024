@@ -21,3 +21,11 @@
 -   Promises
 -   Async/await
 -   Map, filter, reduce, sort
+
+## React Fundamental
+
+-   Core concepts: components, props, JSX
+-   Creating and reusing components
+-   Rendering lists
+-   Conditional rendering
+-   Start writing code on your own!
