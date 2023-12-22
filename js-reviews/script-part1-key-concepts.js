@@ -212,6 +212,4 @@ function getTotalReviewCount(book) {
 
 getTotalReviewCount(book);
 
-// Array Map Methods: Map, Filter, Reduce (function array methods)
-
 
