@@ -14,3 +14,10 @@
 
 1. Next.js
 2. Remix
+
+## JavaScript Fundamental for React
+
+-   Destructuring, spread operator, template literals, ternaries
+-   Promises
+-   Async/await
+-   Map, filter, reduce, sort
