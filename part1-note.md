@@ -29,3 +29,11 @@
 -   Rendering lists
 -   Conditional rendering
 -   Start writing code on your own!
+
+### Components as Building Blocks
+
+-   React applications are entirely made out of components
+-   Building blocks of user interfaces in React
+-   Piece of UI that has its own data, logic, and appearance (how it works and looks)
+-   We build complex UIs by building multiple components and combining them
+-   Components can be reused, nested inside each other, and pass data between them
