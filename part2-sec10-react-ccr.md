@@ -71,3 +71,11 @@ A Mix of Huge, Small Components
 -   Make it loosely couled and highly reusable.
 -   Fix prop drilling issue.
 -   Great for layouts by clearly composition defined at the parent level.
+
+# Designing a Component
+
+1. Standalone. Not rely on any css or external files.
+
+## Props as an API
+
+-   Not too many or little props. (Complexity vs Flexibility)
