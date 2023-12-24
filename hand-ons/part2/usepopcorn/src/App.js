@@ -52,6 +52,7 @@ const average = (arr) =>
 
 function App() {
     const [movies, setMovies] = useState(tempMovieData);
+    const [watched, setWatched] = useState(tempWatchedData);
 
     return (
         <>
@@ -61,10 +62,13 @@ function App() {
                 <TotalResult movies={movies} />
             </NavBar>
             <Main>
-                <MoviesBox>
+                <ContentBox>
                     <MoviesList movies={movies} />
-                </MoviesBox>
-                <WatchedBox />
+                </ContentBox>
+                <ContentBox>
+                    <WatchedSummary watched={watched} />
+                    <WatchedMoviesList watched={watched} />
+                </ContentBox>
             </Main>
         </>
     );
@@ -74,31 +78,6 @@ function Main({ children }) {
     return <main className="main">
         {children}
     </main>;
-}
-
-function WatchedBox({ children }) {
-    const [isOpen, setIsOpen] = useState(true);
-    const [watched, setWatched] = useState(tempWatchedData);
-
-    return <div className="box">
-        <ToggleButton isOpen={isOpen} setIsOpen={setIsOpen} />
-        {isOpen && (
-            <>
-                <WatchedSummary watched={watched} />
-                <WatchedMoviesList watched={watched} />
-            </>
-        )}
-    </div>;
-}
-
-function ToggleButton({ isOpen, setIsOpen }) {
-    return (
-        <button
-            className="btn-toggle"
-            onClick={() => setIsOpen((open) => !open)}>
-            {isOpen ? "–" : "+"}
-        </button>
-    );
 }
 
 function WatchedMoviesList({ watched }) {
@@ -159,10 +138,14 @@ function WatchedSummary({ watched }) {
     </div>;
 }
 
-function MoviesBox({ children }) {
+function ContentBox({ children }) {
     const [isOpen, setIsOpen] = useState(true);
     return <div className="box">
-        <ToggleButton isOpen={isOpen} setIsOpen={setIsOpen} />
+        <button
+            className="btn-toggle"
+            onClick={() => setIsOpen((open) => !open)}>
+            {isOpen ? "–" : "+"}
+        </button>
         {isOpen && children}
     </div>;
 }
