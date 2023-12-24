@@ -32,10 +32,6 @@ function Accordion() {
     const [currOpen, setCurrOpen] = useState(null);
 
     function handleCurrOpen(index) {
-        if (currOpen === index) {
-            setCurrOpen(null);
-            return;
-        }
         setCurrOpen(index);
     }
 
@@ -47,17 +43,27 @@ function Accordion() {
                 key={i}
                 title={el.title}
                 text={el.text}
-                isOpen={currOpen === i}
+                currOpen={currOpen}
                 onOpen={handleCurrOpen}
             />
         ))}
     </div>;
 }
 
-function AccordionItem({ number, title, text, isOpen, onOpen }) {
+function AccordionItem({ number, title, text, currOpen, onOpen }) {
+    const isOpen = currOpen === number;
+
+    function handleToggle() {
+        if (isOpen) {
+            onOpen(null);
+        } else {
+            onOpen(number);
+        }
+    }
+
     return (
         <div className={`item ${isOpen ? "open" : ""}`}
-            onClick={() => onOpen(number)}>
+            onClick={handleToggle}>
             <p className="number">{number <= 9 ? `0${number + 1}` : number + 1}</p>
             <p className="title">{title}</p>
             <p className="icon">
