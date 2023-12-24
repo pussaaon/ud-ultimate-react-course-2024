@@ -79,3 +79,10 @@ A Mix of Huge, Small Components
 ## Props as an API
 
 -   Not too many or little props. (Complexity vs Flexibility)
+-   Props to consider including
+    -   UI setting
+    -   Callback function to return state values
+    -   Functional setting
+    -   Text messages
+    -   Overriding ClassName
+    -   Default values
