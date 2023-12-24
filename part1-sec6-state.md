@@ -11,7 +11,7 @@
 2. How to use state in practice?
     - useState
     - useReducer
-    - Content API
+    - Context API
 3. Thinking about state
     - When to use state
     - Where to place state

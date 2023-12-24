@@ -65,3 +65,9 @@ State that is computed from an existing piece of state or from props
 -   Just regular variables, no useState
 -   Use one state that is the single course of truth for this related data
 -   Works because re-rendering component will automatically re-calculated derived state
+
+# The Children Prop
+
+-   The children prop allow us to pass JSX into an element (besides regular props)
+-   Essential tool to make reusable and configurable components (especially component content)
+-   Really useful for generic components that don't know their content before being used (e.g. modal)
