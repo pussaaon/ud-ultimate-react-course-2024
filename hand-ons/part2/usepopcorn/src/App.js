@@ -55,11 +55,16 @@ const KEY = "f84fc31d";
 function App() {
     const [movies, setMovies] = useState([]);
     const [watched, setWatched] = useState([]);
+    const query = "interstellar";
 
+    // In Strict Mode, React will double invoke the useEffect callback.
     useEffect(() => {
-        fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`)
-            .then((res) => res.json())
-            .then(data => setMovies(data));
+        async function fetchMovies() {
+            const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
+            const data = await res.json();
+            return data.search;
+        }
+        setMovies(fetchMovies());
     }, []);
 
     return (
