@@ -39,3 +39,47 @@
 -   Execute after the component mounts (initial render), and after subsequent re-renders (according to dependency array)
 -   Used to keep a component synchronized with some external system (stays up-to-date)
 -   Should not overuse the Effects.
+
+# What's The UseEffect Dependency Array?
+
+-   By default, effects run after every render. We can prevent that by passing a dependency array.
+-   Without the dependency array, React doesn't know when to run the effect.
+-   Each time one of the dependencies changes, the effect will be executed again.
+-   Every state variable and prop used inside the effect MUST be included in the dependency array e.g., query term. Otherwise, we get a "stale closure".
+
+## Synchronization And Lifecycle
+
+Dependency (State or Props) Changes
+
+-   Effect is executed again.
+-   The component is re-rendered.
+
+> Effects and component lifectcle are deeply connected.
+
+### Examples:
+
+```js
+useEffect(fn, [x, y, z]);
+```
+
+-   Effect synchronizes with x, y, and z
+-   Runs on mount and re-renders triggered by updating x, y, or z.
+
+```js
+useEffect(fn, []);
+```
+
+-   Effect synchronizes with no state/props
+-   Runs only on mount (initital render)
+
+```js
+useEffect(fn);
+```
+
+-   Effect synchronizes with everything
+-   Runs on every render (Usually bad!)
+
+## When Are Effects Executed?
+
+-   After a browser painted. Otherwise, the effect will block the UI.
+-   Dependencies changes and after a browser painted.
