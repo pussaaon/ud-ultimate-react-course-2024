@@ -58,13 +58,14 @@ function App() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-    const query = "titanic";
+    const [query, setQuery] = useState("");
 
     // In Strict Mode, React will double invoke the useEffect callback.
     useEffect(() => {
         async function fetchMovies() {
             try {
                 setIsLoading(true);
+                setError("");
 
                 const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
                 if (!res.ok) {
@@ -85,14 +86,20 @@ function App() {
             }
 
         }
+
+        if (query.length < 3) {
+            setMovies([]);
+            setError("");
+            return;
+        }
         fetchMovies()
-    }, []);
+    }, [query]);
 
     return (
         <>
             <NavBar>
                 <Logo />
-                <SearchBox />
+                <SearchBox query={query} onSetQuery={setQuery} />
                 <TotalResult movies={movies} />
             </NavBar>
             <Main>
@@ -225,16 +232,14 @@ function TotalResult({ movies }) {
     </p>;
 }
 
-function SearchBox() {
-
-    const [query, setQuery] = useState("");
+function SearchBox({ query, onSetQuery }) {
 
     return <input
         className="search"
         type="text"
         placeholder="Search movies..."
         value={query}
-        onChange={(e) => setQuery(e.target.value)} />;
+        onChange={(e) => onSetQuery(e.target.value)} />;
 }
 
 function Logo() {
