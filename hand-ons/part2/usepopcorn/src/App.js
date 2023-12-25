@@ -55,16 +55,37 @@ const KEY = "f84fc31d";
 function App() {
     const [movies, setMovies] = useState([]);
     const [watched, setWatched] = useState([]);
-    const query = "interstellar";
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const query = "titanic";
 
     // In Strict Mode, React will double invoke the useEffect callback.
     useEffect(() => {
         async function fetchMovies() {
-            const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
-            const data = await res.json();
-            return data.search;
+            try {
+                setIsLoading(true);
+
+                const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
+                if (!res.ok) {
+                    throw new Error(`${data.error} (${res.status})`);
+                }
+
+                const data = await res.json();
+                console.log(data);
+                if (data.Response === "False") {
+                    throw new Error(data.Error);
+                }
+                setMovies(data.Search);
+            } catch (error) {
+                console.error(error);
+                setError(error.message);
+            } finally {
+                setIsLoading(false);
+            }
+
         }
-        setMovies(fetchMovies());
+        fetchMovies()
     }, []);
 
     return (
@@ -76,7 +97,9 @@ function App() {
             </NavBar>
             <Main>
                 <ContentBox>
-                    <MoviesList movies={movies} />
+                    {isLoading && <Loading />}
+                    {!isLoading && !error && <MoviesList movies={movies} />}
+                    {error && <ErrorMessage message={error} />}
                 </ContentBox>
                 <ContentBox>
                     <WatchedSummary watched={watched} />
@@ -91,6 +114,16 @@ function Main({ children }) {
     return <main className="main">
         {children}
     </main>;
+}
+
+function Loading() {
+    return <p className="loader">Loading...</p>;
+}
+
+function ErrorMessage({ message }) {
+    return <p className="error">
+        <span>⛔️</span> {message}
+    </p>;
 }
 
 function WatchedMoviesList({ watched }) {
@@ -177,7 +210,7 @@ function MoviesList({ movies }) {
                 </div>
             </li>
         ))}
-    </ul>;
+    </ul>
 }
 
 function NavBar({ children }) {
