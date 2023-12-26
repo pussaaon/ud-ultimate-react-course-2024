@@ -8,7 +8,10 @@ const KEY = "99ddb7a7";
 
 function App() {
     const [movies, setMovies] = useState([]);
-    const [watched, setWatched] = useState([]);
+    const [watched, setWatched] = useState(() =>
+        localStorage.getItem("watched")
+            ? JSON.parse(localStorage.getItem("watched"))
+            : []);
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
@@ -30,6 +33,10 @@ function App() {
     function handleRemoveWatched(id) {
         setWatched((c) => c.filter((movie) => movie.imdbID !== id));
     }
+
+    useEffect(() => {
+        localStorage.setItem("watched", JSON.stringify(watched));
+    }, [watched]);
 
     // In Strict Mode, React will double invoke the useEffect callback.
     // TODO: Refactor this to event handler on query input
