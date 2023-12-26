@@ -83,3 +83,22 @@ useEffect(fn);
 
 -   After a browser painted. Otherwise, the effect will block the UI.
 -   Dependencies changes and after a browser painted.
+
+### The UseEffect Cleanup Function
+
+-   Function that we can trurn from an effect (optional)
+-   Runs on two different occasions:
+
+    1. Before the effect is executed again. (Re-render)
+    2. After a component has unmounted.
+
+-   Necessary whenever the side effect keeps happening after the component has been re-rendered or unmounted.
+
+-   Each effect should do only one thing! Use one useEffect hook for each side effect. This makes effects easier to clean up.
+
+_Examples cleanup effects:_
+
+-   HTTP request => Cancel request
+-   API subscription => Cancel subscription
+-   Start timer => Stop timer
+-   Add event listener => Remove listener
