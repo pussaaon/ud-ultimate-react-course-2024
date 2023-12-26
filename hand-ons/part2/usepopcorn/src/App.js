@@ -157,6 +157,12 @@ function MovieDetail({ id, onCloseMovie, onAddWatched, watched }) {
     const isWatched = watched.some((movie) => movie.imdbID === id);
     const watchedRating = watched.find((movie) => movie.imdbID === id)?.userRating;
 
+    const countRatingRef = useRef(0);
+
+    useEffect(() => {
+        if (userRating) countRatingRef.current++;
+    }, [userRating]);
+
     const {
         Title: title,
         Year: year,
@@ -191,7 +197,8 @@ function MovieDetail({ id, onCloseMovie, onAddWatched, watched }) {
             poster,
             imdbRating: Number(imdbRating),
             runtime: Number(runtime.split(" ").at(0)),
-            userRating
+            userRating,
+            countRating: countRatingRef.current,
         }
 
         onAddWatched(watchedMovie);
