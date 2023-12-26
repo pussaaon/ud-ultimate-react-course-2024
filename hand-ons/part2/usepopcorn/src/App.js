@@ -74,6 +74,10 @@ function App() {
         setWatched((c) => [...c, movie]);
     }
 
+    function handleRemoveWatched(id) {
+        setWatched((c) => c.filter((movie) => movie.imdbID !== id));
+    }
+
     // In Strict Mode, React will double invoke the useEffect callback.
     useEffect(() => {
         async function fetchMovies() {
@@ -134,7 +138,10 @@ function App() {
                         />
                         : (<>
                             <WatchedSummary watched={watched} />
-                            <WatchedMoviesList onSelectMovie={handleSelectMovie} watched={watched} />
+                            <WatchedMoviesList
+                                onSelectMovie={handleSelectMovie}
+                                watched={watched}
+                                onRemoveWatched={handleRemoveWatched} />
                         </>)
                     }
                 </ContentBox>
@@ -159,10 +166,14 @@ function ErrorMessage({ message }) {
     </p>;
 }
 
-function WatchedMoviesList({ watched, onSelectMovie }) {
+function WatchedMoviesList({ watched, onSelectMovie, onRemoveWatched }) {
     return <ul className="list">
         {watched.map((movie) => (
-            <WatchedMovie onSelectMovie={onSelectMovie} key={movie.imdbID} movie={movie} />
+            <WatchedMovie
+                onSelectMovie={onSelectMovie}
+                onRemoveWatched={onRemoveWatched}
+                key={movie.imdbID}
+                movie={movie} />
         ))}
     </ul>;
 }
@@ -288,7 +299,7 @@ function MovieDetail({ id, onCloseMovie, onAddWatched, watched }) {
     );
 }
 
-function WatchedMovie({ movie, onSelectMovie }) {
+function WatchedMovie({ movie, onSelectMovie, onRemoveWatched }) {
     return <li key={movie.imdbID} onClick={() => onSelectMovie(movie.imdbID)}>
         <img src={movie.poster} alt={`${movie.title} poster`} />
         <h3>{movie.title}</h3>
@@ -305,6 +316,10 @@ function WatchedMovie({ movie, onSelectMovie }) {
                 <span>⏳</span>
                 <span>{movie.runtime} min</span>
             </p>
+            <button
+                className="btn-delete"
+                onClick={() => onRemoveWatched(movie.imdbID)}
+            >X</button>
         </div>
     </li>;
 }
@@ -324,15 +339,15 @@ function WatchedSummary({ watched }) {
             </p>
             <p>
                 <span>⭐️</span>
-                <span>{avgImdbRating}</span>
+                <span>{avgImdbRating.toFixed(2)}</span>
             </p>
             <p>
                 <span>🌟</span>
-                <span>{avgUserRating}</span>
+                <span>{avgUserRating.toFixed(2)}</span>
             </p>
             <p>
                 <span>⏳</span>
-                <span>{avgRuntime} min</span>
+                <span>{avgRuntime.toFixed(2)} min</span>
             </p>
         </div>
     </div>;
