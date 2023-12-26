@@ -91,3 +91,19 @@ myRef.current = 1000;
 
 State: Persist across renders, Updating cause re-render, Immutable, Asynchronous updates
 Refs: Persist across rendders, Not re-render, Mutable, Instant updates
+
+# Reusing Logic With Custom Hooks
+
+1. UI => Use component
+2. Logic => Does logic contain any React hooks?
+    - No => Use regular function
+    - Yes => Use custom hook
+
+-   Allow us to reuse non-visual logic in multiple components.
+-   One custom hook should have one purpose, to make it reusable and portable (even across multiple projects.)
+-   Rules of hooks apply to custom hooks too.
+-   Needs to use at least one or more hooks.
+-   Unlike components, a custom hook can receive and return any relevant data (usually array or object).
+-   Must start a function with 'use' e.g., useFetchMovie
+
+> There are many ready-to-use customer hooks out there today as it's getting more commonly used.
