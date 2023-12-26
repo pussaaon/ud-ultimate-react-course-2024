@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
 
 const average = (arr) =>
@@ -386,12 +386,31 @@ function TotalResult({ movies }) {
 
 function SearchBox({ query, onSetQuery }) {
 
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        function resetInput(e) {
+            if (document.activeElement === inputRef.current)
+                return;
+
+            if (e.code === "Enter") {
+                inputRef.current.focus();
+                onSetQuery("");
+            }
+        }
+
+        document.addEventListener("keydown", resetInput);
+        return () => document.removeEventListener("keydown", resetInput);
+    });
+
     return <input
         className="search"
         type="text"
         placeholder="Search movies..."
         value={query}
-        onChange={(e) => onSetQuery(e.target.value)} />;
+        onChange={(e) => onSetQuery(e.target.value)}
+        ref={inputRef}
+    />;
 }
 
 function Logo() {

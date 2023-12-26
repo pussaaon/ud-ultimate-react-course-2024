@@ -58,3 +58,36 @@ useEffect(func, [])
 ```
 
 > Hooks need to be called in the same order on every render\*
+
+# Summary of Defining and Updating State
+
+1. Creating State
+
+-   Simple: useState(value)
+-   Based on callback function (lazy evaluation): useState(() => statement).
+-   Don't direct call function in this step, as it cause React to trigger this function every render unnecessary.
+
+2. Updating State
+
+-   Simple: setState(value)
+-   Based on current state: when we need to use previous state or do lazy evaluation : setState((c) => c + 1).
+
+# What Are Refs?
+
+-   "Box" (object) with a mutable .current property that is persisted across renders ("normal" variables are always reset).
+-   Two big use cases:
+
+    1. Creating a variable that stays the same between renders (e.g. previous state, setTimeout id, etc.)
+    2. Selecting and storing DOM elements.
+
+-   Refs are for data that is NOT rendered: usually only appear in event handlers or effects, not in JSX (otherwise use state).
+-   Do NOT read write or read .current in render logic (like state)
+
+```js
+myRef.current = 1000;
+```
+
+## Refs vs. State
+
+State: Persist across renders, Updating cause re-render, Immutable, Asynchronous updates
+Refs: Persist across rendders, Not re-render, Mutable, Instant updates
