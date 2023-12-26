@@ -32,6 +32,7 @@ function App() {
     }
 
     // In Strict Mode, React will double invoke the useEffect callback.
+    // TODO: Refactor this to event handler on query input
     useEffect(() => {
 
         async function fetchMovies() {
