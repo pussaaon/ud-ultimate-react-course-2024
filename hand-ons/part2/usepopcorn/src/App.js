@@ -80,12 +80,15 @@ function App() {
 
     // In Strict Mode, React will double invoke the useEffect callback.
     useEffect(() => {
+
+        const controller = new AbortController();
+
         async function fetchMovies() {
             try {
                 setIsLoading(true);
                 setError("");
 
-                const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`);
+                const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`, { signal: controller.signal });
                 if (!res.ok) {
                     throw new Error(`Something went wrong: ${res.status}`);
                 }
@@ -96,6 +99,9 @@ function App() {
                 }
                 setMovies(data.Search);
             } catch (error) {
+                if (error.name === "AbortError") {
+                    return;
+                }
                 setError(error.message);
             } finally {
                 setIsLoading(false);
