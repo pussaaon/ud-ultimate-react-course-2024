@@ -36,7 +36,7 @@ _Only for libraries_
 
 ## The Rules of Hooks
 
-1. Only call hooks at the top level
+1. Ensure hooks are created consistently across different renderings.
 
 -   Do not call hooks inside conditionals, loops, nested functions, or after an early return.
 -   This is necessary to ensure that hooks are always called in the same order (Linklist consistency in Fiber tree, Hooks rely on this.)
@@ -107,3 +107,9 @@ Refs: Persist across rendders, Not re-render, Mutable, Instant updates
 -   Must start a function with 'use' e.g., useFetchMovie
 
 > There are many ready-to-use customer hooks out there today as it's getting more commonly used.
+
+To continue tmr =>
+[] custom hooks 3 use cases in usePopcorn project
+[] finish part 2 completely
+[] 50% on part 3
+[] invite Beat, Name for lunch?

@@ -1,22 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
+import { useFetchMovies } from "./ServiceHooks/useFetchMovies";
+import { useFetchMovieDetail } from "./ServiceHooks/useFetchMovieDetail";
 
 const average = (arr) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const KEY = "99ddb7a7";
-
 function App() {
-    const [movies, setMovies] = useState([]);
     const [watched, setWatched] = useState(() =>
         localStorage.getItem("watched")
             ? JSON.parse(localStorage.getItem("watched"))
             : []);
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
     const [query, setQuery] = useState("");
     const [selectedMovieId, setSelectedMovieId] = useState(null);
+    const { movies, isLoading, error } = useFetchMovies(query);
 
     function handleSelectMovie(id) {
         setSelectedMovieId(c => c === id ? null : id);
@@ -40,45 +38,7 @@ function App() {
 
     // In Strict Mode, React will double invoke the useEffect callback.
     // TODO: Refactor this to event handler on query input
-    useEffect(() => {
 
-        async function fetchMovies() {
-            try {
-                setIsLoading(true);
-                setError("");
-
-                const controller = new AbortController();
-                const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`, { signal: controller.signal });
-                if (!res.ok) {
-                    throw new Error(`Something went wrong: ${res.status}`);
-                }
-
-                const data = await res.json();
-                if (data.Response === "False") {
-                    throw new Error(data.Error);
-                }
-                setMovies(data.Search);
-                return () => {
-                    controller.abort();
-                }
-            } catch (error) {
-                if (error.name === "AbortError") {
-                    return;
-                }
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-
-        }
-
-        if (query.length < 3) {
-            setMovies([]);
-            setError("");
-            return;
-        }
-        fetchMovies()
-    }, [query]);
 
     return (
         <>
@@ -149,9 +109,7 @@ function WatchedMoviesList({ watched, onSelectMovie, onRemoveWatched }) {
 
 function MovieDetail({ id, onCloseMovie, onAddWatched, watched }) {
 
-    const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [movie, setMovie] = useState(null);
+    const { movie, isLoading, error } = useFetchMovieDetail(id);
     const [userRating, setUserRating] = useState(0);
 
     const isWatched = watched.some((movie) => movie.imdbID === id);
@@ -204,33 +162,6 @@ function MovieDetail({ id, onCloseMovie, onAddWatched, watched }) {
         onAddWatched(watchedMovie);
         onCloseMovie()
     }
-
-    useEffect(() => {
-        async function fetchMovieDetail() {
-            try {
-                setIsLoading(true);
-                setError("");
-                const url = `http://www.omdbapi.com/?apikey=${KEY}&i=${id}`
-                const res = await fetch(url);
-
-                if (!res.ok) {
-                    throw new Error("Something went wrong");
-                }
-
-                const data = await res.json();
-                if (data.Response === "False") {
-                    throw new Error(data.Error);
-                }
-
-                setMovie(data);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        fetchMovieDetail();
-    }, [id]);
 
     useEffect(() => {
         document.title = `Movie | ${title}`;
