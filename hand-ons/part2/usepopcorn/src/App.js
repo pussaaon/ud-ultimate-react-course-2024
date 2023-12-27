@@ -3,6 +3,7 @@ import StarRating from "./StarRating";
 import { useFetchMovies } from "./ServiceHooks/useFetchMovies";
 import { useFetchMovieDetail } from "./ServiceHooks/useFetchMovieDetail";
 import { useKeydownEvent } from "./UserEventHooks/useKeydownEvent";
+import { useLocalStorageState } from "./StorageHooks/useLocalStorageState";
 
 const average = (arr) =>
     arr.reduce((acc, cur, _, arr) => {
@@ -11,10 +12,7 @@ const average = (arr) =>
     }, 0);
 
 function App() {
-    const [watched, setWatched] = useState(() =>
-        localStorage.getItem("watched")
-            ? JSON.parse(localStorage.getItem("watched"))
-            : []);
+    const [watched, setWatched] = useLocalStorageState([], "watched");
 
     const [query, setQuery] = useState("");
     const [selectedMovieId, setSelectedMovieId] = useState(null);
@@ -36,13 +34,8 @@ function App() {
         setWatched((c) => c.filter((movie) => movie.imdbID !== id));
     }
 
-    useEffect(() => {
-        localStorage.setItem("watched", JSON.stringify(watched));
-    }, [watched]);
-
     // In Strict Mode, React will double invoke the useEffect callback.
     // TODO: Refactor this to event handler on query input
-
 
     return (
         <>
