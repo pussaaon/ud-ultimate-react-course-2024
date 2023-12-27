@@ -5,7 +5,10 @@ import { useFetchMovieDetail } from "./ServiceHooks/useFetchMovieDetail";
 import { useKeydownEvent } from "./UserEventHooks/useKeydownEvent";
 
 const average = (arr) =>
-    arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+    arr.reduce((acc, cur, _, arr) => {
+        if (cur) return acc + cur / arr.length
+        else return acc + 0 / arr.length
+    }, 0);
 
 function App() {
     const [watched, setWatched] = useState(() =>
@@ -232,7 +235,7 @@ function WatchedMovie({ movie, onSelectMovie, onRemoveWatched }) {
             </p>
             <p>
                 <span>⏳</span>
-                <span>{movie.runtime} min</span>
+                <span>{movie.runtime || '-'} min</span>
             </p>
             <button
                 className="btn-delete"
