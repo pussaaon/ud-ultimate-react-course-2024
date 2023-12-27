@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
 import { useFetchMovies } from "./ServiceHooks/useFetchMovies";
 import { useFetchMovieDetail } from "./ServiceHooks/useFetchMovieDetail";
+import { useKeydownEvent } from "./UserEventHooks/useKeydownEvent";
 
 const average = (arr) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -134,18 +135,7 @@ function MovieDetail({ id, onCloseMovie, onAddWatched, watched }) {
         Genre: genre,
     } = movie !== null ? movie : {};
 
-    useEffect(() => {
-        function onClosingMovieDetail(e) {
-            if (e.code === "Escape") {
-                onCloseMovie();
-            }
-        }
-        document.addEventListener("keydown", onClosingMovieDetail);
-
-        return () => {
-            document.removeEventListener("keydown", onClosingMovieDetail);
-        }
-    }, [onCloseMovie]);
+    useKeydownEvent("Escape", onCloseMovie);
 
     function handleAddWatched() {
         const watchedMovie = {
@@ -326,19 +316,12 @@ function SearchBox({ query, onSetQuery }) {
 
     const inputRef = useRef(null);
 
-    useEffect(() => {
-        function resetInput(e) {
-            if (document.activeElement === inputRef.current)
-                return;
+    useKeydownEvent("Enter", () => {
+        if (document.activeElement === inputRef.current)
+            return;
 
-            if (e.code === "Enter") {
-                inputRef.current.focus();
-                onSetQuery("");
-            }
-        }
-
-        document.addEventListener("keydown", resetInput);
-        return () => document.removeEventListener("keydown", resetInput);
+        inputRef.current.focus();
+        onSetQuery("");
     });
 
     return <input
