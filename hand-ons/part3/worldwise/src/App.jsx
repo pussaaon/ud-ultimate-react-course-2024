@@ -3,6 +3,7 @@ import Homepage from './pages/Homepage';
 import Product from './pages/Product';
 import Pricing from './pages/Pricing';
 import PageNotFound from './pages/PageNotFound';
+import './index.css';
 
 function App() {
     return (
