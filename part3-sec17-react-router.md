@@ -22,3 +22,15 @@
 -   Utility-first CSS: inside JSX element, className prop, scope JSX element, based on CSS
 
 > Alternative to styling with CSS: UI libraries like MUI, Chakra UI, Mantine, etc.
+
+# The URL for State Management
+
+-   The URL is an excellent place to store UI state and an alternative to useState in some situations!
+-   Examples: open/closed panels, currently selected list item, list sorting order, applied list filters.
+
+1. Easy way to store state in a global place, accessible to all components in the app.
+2. Good way to "pass" data from one page into the next page.
+3. Makes it possible to bookmark and share the page with the exact UI state it had at the time.
+
+> www.example.com/app/cities/lisbon?lat=xx&lng=xx
+> path + params + query string
