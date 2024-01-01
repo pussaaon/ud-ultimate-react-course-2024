@@ -8,7 +8,7 @@ function BackButton() {
         <Button
             type="button"
             className="back"
-            action={(e) => {
+            onClick={(e) => {
                 e.preventDefault();
                 navigate(-1);
             }}> &larr; Back</Button >
