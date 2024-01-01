@@ -47,6 +47,18 @@ function CitiesProvider({ children }) {
         }
     }
 
+    async function deleteCity(id) {
+        try {
+            setIsLoading(true);
+            await fetch(`${BASE_URL}/cities/${id}`, { method: "DELETE" });
+            setCities((cities) => cities.filter((city) => city.id !== id));
+        } catch {
+            console.log("error deleting city ...");
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     useEffect(() => {
         async function fetchCities() {
             try {
@@ -69,7 +81,8 @@ function CitiesProvider({ children }) {
             isLoading,
             currentCity,
             useLoadCity,
-            createCity
+            createCity,
+            deleteCity
         }}>{children}</CitiesContext.Provider>
     );
 }
