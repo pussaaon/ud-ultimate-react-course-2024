@@ -7,6 +7,25 @@ const BASE_URL = "http://localhost:8000"
 function CitiesProvider({ children }) {
     const [cities, setCities] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [currentCity, setCurrentCity] = useState(null);
+
+    function useLoadCity(id) {
+        useEffect(() => {
+            async function fetchCurrentCity() {
+                try {
+                    setIsLoading(true);
+                    const res = await fetch(`${BASE_URL}/cities/${id}`);
+                    const data = await res.json();
+                    setCurrentCity(data);
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    setIsLoading(false);
+                }
+            }
+            fetchCurrentCity();
+        }, [id])
+    }
 
     useEffect(() => {
         async function fetchCities() {
@@ -21,13 +40,15 @@ function CitiesProvider({ children }) {
                 setIsLoading(false);
             }
         }
-
         fetchCities();
     }, []);
+
     return (
         <CitiesContext.Provider value={{
             cities,
-            isLoading
+            isLoading,
+            currentCity,
+            useLoadCity
         }}>{children}</CitiesContext.Provider>
     );
 }
