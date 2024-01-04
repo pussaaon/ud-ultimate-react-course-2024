@@ -12,7 +12,7 @@ function accountReducer(state = initialState, action) {
             return { ...state, balance: state.balance - action.payload };
         case "account/requestLoan":
             if (state.loan > 0) return state;
-            return { ...state, loan: action.payload };
+            return { ...state, loan: action.payload.amount, loanPurpose: action.payload.purpose };
         case "account/payLoan":
             return { ...state, loan: 0, loanPurpose: "", balance: state.balance - state.loan }
         default:
@@ -29,7 +29,9 @@ function withdraw(amount) {
 }
 
 function requestLoan(amount, purpose) {
-    return { type: 'account/requestLoan', payload: { amount, purpose } }
+    return {
+        type: 'account/requestLoan', payload: { amount, purpose }
+    }
 }
 
 function payLoan() {
