@@ -88,7 +88,7 @@ Diffing uses 2 fundamental assumptions (rules):
 
 -   Code that lives at the top level of the component function
 -   Participates in describing how the component view looks like
--   Executed every time the component readers
+-   Executed every time the component renders
 
 2. Event Handler Functions
 
@@ -140,7 +140,7 @@ Diffing uses 2 fundamental assumptions (rules):
 
 1. Add handler to parent (.options)
 2. Check for target element (e.target)
-3. If target is one of the <button>s, handle the event
+3. If target is one of the <button>s, handle the event.
 
 # How React Handles Events
 
