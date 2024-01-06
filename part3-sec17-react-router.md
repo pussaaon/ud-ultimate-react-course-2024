@@ -18,6 +18,20 @@
 -   Feels like a native app.
 -   Additional data might be loaded from a web API when needed.
 
+# Nested Routes
+
+-   Handling sub-routing e.g., app => app/countries/, app/cities => app/cities/:id
+
+```jsx
+<Routes>
+    <Route path="app" element={<AppLayout />}>
+        <Route path="cities" element={<CityList />} />
+    </Route>
+</Routes>
+```
+
+-   Then use <Outlet /> component to place the position where the sub route element should be.
+
 # Styling Options in React
 
 -   Inline CSS: inside JSX element, style prop, scope JSX element, based on CSS
