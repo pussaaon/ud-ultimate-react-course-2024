@@ -4,14 +4,19 @@
 -   Building our first single-page application (SPA)
 -   Styles with CSS Modules
 
+# What is Routing?
+
+-   With routing, we match different URLs to different UI views (React components): routes.
+-   Keeps the UI in sync with the current browser URL.
+
 # Single-Page Applications (SPA)
 
 -   Application that is executed entirely on the client (browsers).
--   Routes: different URLs correspond to different views (components).
--   JavaScript (React) is used to update the page (DOM).
+    1.  Routes: different URLs correspond to different views (components).
+    2.  JavaScript (React) is used to update the page (DOM).
 -   The page is never reloaded.
 -   Feels like a native app.
--   Additional data might be loaded from a web API.
+-   Additional data might be loaded from a web API when needed.
 
 # Styling Options in React
 
