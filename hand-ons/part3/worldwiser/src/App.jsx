@@ -27,7 +27,7 @@ function App() {
                         <Route path="cities" element={<CityList />} />
                         <Route path="cities/:id" element={<City />} />
                         <Route path="countries" element={<CountryList />} />
-                        <Route path="form" element={<AddForm />} />
+                        <Route path="addform" element={<AddForm />} />
                     </Route>
                     <Route path="*" element={<PageNotFound />} />
                 </Routes>
