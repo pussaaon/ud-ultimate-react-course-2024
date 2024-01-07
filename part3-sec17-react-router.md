@@ -44,6 +44,8 @@
 
 # The URL for State Management
 
+x
+
 -   The URL is an excellent place to store UI state and an alternative to useState in some situations!
 -   Examples: open/closed panels, currently selected list item, list sorting order, applied list filters.
 
