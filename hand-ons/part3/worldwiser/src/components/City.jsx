@@ -1,8 +1,9 @@
-import { useParams, useSearchParams } from "react-router-dom";
-import styles from "./City.module.css";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useCitiesContext } from "../context/CitiesContext";
 import { useEffect } from "react";
+import styles from "./City.module.css";
+import Spinner from "./Spinner";
+import BackButton from "./BackButton";
 
 const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
@@ -19,12 +20,14 @@ function City() {
     // const lat = searchParams.get("lat");
     // const lng = searchParams.get("lng");    
 
-    const { currentCity, getCity } = useCitiesContext();
+    const { currentCity, getCity, isLoading } = useCitiesContext();
     const { cityName, emoji, date, notes } = currentCity;
 
     useEffect(() => {
         getCity(id);
     }, [id]);
+
+    if (isLoading) return <Spinner />;
 
     return (
         <div className={styles.city}>
@@ -59,7 +62,7 @@ function City() {
             </div>
 
             <div>
-                {/* <ButtonBack /> */}
+                <BackButton />
             </div>
         </div>
     );
