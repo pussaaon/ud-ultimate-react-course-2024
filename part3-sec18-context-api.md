@@ -7,7 +7,7 @@
 # What is the Context API?
 
 -   System to pass data throughout the app without manually passing props down the tree.
--   Allows us to "broadcast" global state to the entire app
+-   Allows us to "broadcast" global state to the entire app or to all the children component of the certain context.
 -   All the components subscribed to the provider, get re-render when the value is updated.
 
 1. Provider: gives all child components access to value
