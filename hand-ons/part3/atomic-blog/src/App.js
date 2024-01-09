@@ -63,7 +63,7 @@ function Results() {
     return <p>🚀 {posts.length} atomic posts found</p>;
 }
 
-function Main() {
+const Main = function Main() {
     return (
         <main>
             <FormAddPost />

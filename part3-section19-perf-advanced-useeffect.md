@@ -86,3 +86,11 @@ If same inputs => cached result is return. Elseif new inputs => new calculated r
 3. Memoizing values that are used in dependency array of another hook.
 
 -   Only use one of these three at a time.
+
+# Optimizing Context
+
+When three things to be true at the same time
+
+1. The state need to change
+2. The state has many consumers
+3. The app is getting slow
