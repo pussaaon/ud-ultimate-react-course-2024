@@ -25,6 +25,11 @@ function Calculator({ workouts, allowSound }) {
         playSound();
     }, [duration, allowSound]);
 
+
+    useEffect(() => {
+        document.title = `Workout timer: ${number} / ${duration} / ${sets}`;
+    }, [number, duration, sets])
+
     function handleInc() {
         setDuration((duration) => Math.floor(duration + 1));
     }
