@@ -132,7 +132,7 @@ _Dont'_
 
 -   Move function into the effect itself.
 -   If you need the function in multiple places, memoize it (useCallback).
--   If the function doesn't reference any reactive values, move it out of the component.
+-   If the function doesn't reference any reactive values, move it out of the component so it won't get to re-render with the component.
 
 2. Removing Object Dependencies
 
