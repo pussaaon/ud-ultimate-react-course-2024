@@ -29,3 +29,13 @@ _Global Remote State_
 # The Mechanism of Redux
 
 Event Handler in Component => dispatch => (action)Store (reducers) => Next State => Re-render
+
+# Redux Thunks
+
+-   Middleware: where to make an asynchronous API call (or any other async operation) in Redux.
+
+Component => dispatch => _Thunk Middleware_ => (final action: type, payload) => Store
+
+-   Perfect for asynchronous code
+-   API calls, timers, logging, etc.
+-   The place for side effects
