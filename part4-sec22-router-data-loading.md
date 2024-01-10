@@ -14,3 +14,4 @@ npm i react-router-dom
 # Router Data Loader
 
 -   Rendering and fetching data happens at the same time. This reduce the works to handle loading.
+-   This calls render as loading strategy.
