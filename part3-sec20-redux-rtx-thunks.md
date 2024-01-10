@@ -60,3 +60,36 @@ Component => dispatch => _Thunk Middleware_ => (final action: type, payload) => 
     1. We can write code that "mutates" state inside reducers (will be converted to immutable logic behind the scenes by "Immer" library.)
     2. Action creators are automatically created
     3. Automatic setup of thunk middleware and DevTools
+
+# Context API vs. Redux
+
+## Context API + useReducer
+
+-   Built into React
+-   Easy to set up a single context
+-   Additional state "slide" requires new context set up from scratch ("provider hell" in App.js)
+-   No mechanism for async operations
+-   Performance optimization is a pain, can cause a lot of renders without optimization.
+-   Only React DevTools
+
+### When to Use
+
+-   Use the Context API for global state management in small apps
+-   When you just need to share a value that doesn't chnage often [Color theme, preferred language, authenticated user, ...]
+-   When you need to solve a simple prop drilling problem
+-   When you need to manage state in a local sub-tree of the app e.g., in the compound component pattern
+
+## Redux
+
+-   Requires additional package (larger bundle size)
+-   More work to set up initially
+-   Once set up, it's easy to create additional state "slices"
+-   Supports middleware for async operations (\*no longer recommended)
+-   Performance is optimized out of the box e.g., minimizing wasted renders
+-   Excellement DevTools integrated.
+
+### When to Use
+
+-   Use Redux for global state management in large apps
+-   When you have lots of global UI state that needs to be updated frequently (because Redux is optimized for this) [Shopping cart, current tabs, complex filters or search, ...]
+-   When you have compelx state with nested objects and arrays (because you can mutate state with Redux Toolkit)
