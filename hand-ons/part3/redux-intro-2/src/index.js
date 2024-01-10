@@ -6,8 +6,6 @@ import store from "./store";
 
 import './index.css';
 
-store.dispatch({ type: "account/deposit", payload: 1000 });
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>

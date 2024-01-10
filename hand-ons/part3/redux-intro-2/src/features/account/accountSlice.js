@@ -32,6 +32,8 @@ function deposit(amount, currency) {
     if (currency === "USD") return { type: "account/deposit", payload: amount };
 
     return async (dispatch, getState) => {
+        dispatch({ type: "account/convertingCurrency" });
+
         const host = 'api.frankfurter.app';
         const res = await fetch(
             `https://${host}/latest?amount=${amount}&from=${currency}&to=USD`);
