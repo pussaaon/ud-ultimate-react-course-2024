@@ -1,7 +1,12 @@
 # Packaged Install
 
 ```bash
+# https://tailwindcss.com/docs/guides/vite
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
 
+# https://github.com/tailwindlabs/prettier-plugin-tailwindcss
+npm install -D prettier prettier-plugin-tailwindcss
 ```
 
 # What is Tailwind CSS?
