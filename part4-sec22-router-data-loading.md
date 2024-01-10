@@ -10,3 +10,7 @@ npm i react-router-dom
 
 -   React Router's modern data loading capabilities.
 -   How to plan a professional project.
+
+# Router Data Loader
+
+-   Rendering and fetching data happens at the same time. This reduce the works to handle loading.
