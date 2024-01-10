@@ -5,6 +5,7 @@ npm i redux
 npm i react-redux
 npm i redux-thunk
 npm i redux-devtools-extension
+npm i @reduxjs/toolkit
 ```
 
 # What is Redux?
