@@ -59,12 +59,17 @@ function CreateOrder() {
                 <div>
                     <label>Address</label>
                     <div>
-                        <input type="text" name="address" required />
+                        <input type="text" name="address" required className="rounded-full border border-stone-200 
+                            px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 
+                            focus:outline-none focus:ring focus:ring-yellow-400 w-full md:px-6 md:py-3" />
                     </div>
                 </div>
 
                 <div>
                     <input
+                        className="h-6 w-6 accent-yellow-400 
+                            focus:outline-none focus:ring focus:ring-yellow-400
+                            focus:ring-offset-2"
                         type="checkbox"
                         name="priority"
                         id="priority"
@@ -79,7 +84,8 @@ function CreateOrder() {
                     <button disabled={isSubmitting}
                         className="bg-yellow-400 uppercase font-semibold 
                         text-stone-800 py-3 px-4 inline-block 
-                        tracking-wide rounded-full 
+                        tracking-wide ro
+                        unded-full 
                         hover:bg-yellow-300 transition-colors duration-300 
                         focus:outline-none focus:ring focus:ring-yellow-300 
                         focus:bg-yellow-300 focus:ring-offset-2 
