@@ -6,13 +6,13 @@ function Button({ children, disabled, to }) {
 
     if (to)
         return <Link className={className} to={to}>{children}</Link>
-
-    return (
-        <button
-            disabled={disabled}
-            className={className}>
-            {children}
-        </button>
-    )
+    else
+        return (
+            <button
+                disabled={disabled}
+                className={className}>
+                {children}
+            </button>
+        )
 }
 export default Button
