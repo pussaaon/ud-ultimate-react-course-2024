@@ -41,6 +41,8 @@ const cartSlice = createSlice({
                 if (existingItem.quantity > 1) {
                     existingItem.quantity--;
                     existingItem.totalPrice = existingItem.quantity * existingItem.unitPrice;
+                } else {
+                    cartSlice.caseReducers.deleteItem(state, action);
                 }
             }
         },
