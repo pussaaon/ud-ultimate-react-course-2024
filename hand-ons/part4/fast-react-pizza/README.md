@@ -1,8 +1,21 @@
-# React + Vite
+# Study Project: Fast React Pizza Co.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Topics
 
-Currently, two official plugins are available:
+React Router Data Loader / Redux / Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Live Demo
+
+[Preview URL](https://lauv-react-pizza-delivery.netlify.app/)
+
+### github:
+
+[Github URL](https://github.com/pussaaon/ud-ultimate-react-course-2024/tree/master/hand-ons/part4/fast-react-pizza)
+
+## Description
+
+An online pizza ordering app to help people order pizza online and track their order status.
+
+## Methodology
+
+Manage routes with React Router. Use Redux to manage state. Use Tailwind CSS to style the app. And use Data Loader's React Router to load and update data from API.
