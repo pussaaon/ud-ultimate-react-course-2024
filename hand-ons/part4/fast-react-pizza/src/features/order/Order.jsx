@@ -8,11 +8,20 @@ import {
 
 import OrderItem from "./OrderItem";
 import { getOrder } from "../../services/apiRestaurant"
-import { useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
+import { useLoaderData, useFetcher } from "react-router-dom";
 
 function Order() {
     // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
     const order = useLoaderData();
+
+    const fetcher = useFetcher();
+
+    useEffect(() => {
+        if (!fetcher.data && fetcher.state === "idle")
+            fetcher.load("/menu");
+    }, [fetcher])
+
     const {
         id,
         status,
@@ -51,7 +60,13 @@ function Order() {
             </div>
 
             <ul className="dive-stone-200 divide-y border-b border-t">
-                {cart.map(item => <OrderItem item={item} key={item.pizzaId} />)}
+                {cart.map(item =>
+                    <OrderItem
+                        item={item}
+                        key={item.pizzaId}
+                        isLoadingIngredients={fetcher.state === "loading"}
+                        ingredients={fetcher?.data?.find(el => el.id === item.pizzaId).ingredients ?? []}
+                    />)}
             </ul>
 
             <div className="space-y-2 bg-stone-200 px-6 py-5">
