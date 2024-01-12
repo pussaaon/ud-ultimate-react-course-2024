@@ -1,10 +1,13 @@
 import { formatCurrency } from "../../utils/helpers";
-import { useDispatch } from "react-redux";
-import { addItem } from "../cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, getItemQuantityInCart } from "../cart/cartSlice";
 import Button from "../../ui/Button";
+import DeleteItem from "../cart/DeleteItem";
 
 function MenuItem({ item }) {
     const { id, name, unitPrice, ingredients, soldOut, imageUrl } = item;
+    const cartQuantity = useSelector(getItemQuantityInCart(id));
+    const isInCart = cartQuantity > 0;
     const dispatch = useDispatch();
 
     function handleAddToCart() {
@@ -27,17 +30,22 @@ function MenuItem({ item }) {
                 <p className="font-medium">{name}</p>
                 <p className="text-sm capitcalize italic text-stone-500">{ingredients.join(', ')}</p>
                 <div className="mt-auto flex items-center justify-between">
-                    {!soldOut
-                        ? <>
+                    {soldOut &&
+                        <p className="text-sm font-medium uppercase text-stone-500">Sold out</p>}
+                    {!soldOut &&
+                        <>
                             <p className="text-sm">{formatCurrency(unitPrice)}</p>
-                            <Button type="small"
-                                onClick={handleAddToCart}
-                            >Add to cart</Button>
+                            {isInCart
+                                ? <DeleteItem itemId={id} />
+                                : <Button type="small"
+                                    onClick={handleAddToCart}
+                                >Add to cart</Button>
+                            }
                         </>
-                        : <p className="text-sm font-medium uppercase text-stone-500">Sold out</p>}
+                    }
                 </div>
             </div>
-        </li>
+        </li >
     );
 }
 
