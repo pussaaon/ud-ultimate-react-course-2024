@@ -8,10 +8,6 @@ ReactJS - Context API / Reducer Hook
 
 [Preview URL](https://lauv-react-worldwiser.netlify.app/)
 
-### github:
-
-[Github URL](https://github.com/pussaaon/ud-ultimate-react-course-2024/tree/master/hand-ons/part3/worldwiser)
-
 ## Description
 
 A travel tracking app to help people track their travel history and plan their next trip.

@@ -8,10 +8,6 @@ ReactJS - API fetching / Hooks / LocalStorage
 
 [Preview URL](https://lauv-react-usepopcorn.netlify.app/)
 
-### github:
-
-[Github URL](https://github.com/pussaaon/ud-ultimate-react-course-2024/tree/master/hand-ons/part2/usepopcorn)
-
 ## Description
 
 Hands-on project to learn ReactJS. Created a favourite movie list application using ReactJS.

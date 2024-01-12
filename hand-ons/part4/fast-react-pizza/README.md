@@ -8,10 +8,6 @@ React Router Data Loader / Redux / Tailwind CSS
 
 [Preview URL](https://lauv-react-pizza-delivery.netlify.app/)
 
-### github:
-
-[Github URL](https://github.com/pussaaon/ud-ultimate-react-course-2024/tree/master/hand-ons/part4/fast-react-pizza)
-
 ## Description
 
 An online pizza ordering app to help people order pizza online and track their order status.
