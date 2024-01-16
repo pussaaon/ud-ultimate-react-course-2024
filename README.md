@@ -13,4 +13,6 @@ Learning Topics
 
 ---
 
-[Material Link](https://www.udemy.com/course/the-ultimate-react-course/)
+# Materials
+
+1. [React Intensive Course](https://www.udemy.com/course/the-ultimate-react-course/)
