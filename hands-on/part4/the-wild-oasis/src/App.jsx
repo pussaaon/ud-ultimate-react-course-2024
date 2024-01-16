@@ -1,9 +1,18 @@
+import styled from "styled-components";
+import GlobalStyles from "./styles/GlobalStyles";
+
 function App() {
     return (
-        <div>
-            The Wild Oasis
-        </div>
-    )
+        <>
+            <GlobalStyles />
+            <Headline>Wild Oasis</Headline>
+        </>
+    );
 }
 
-export default App
+const Headline = styled.h1`
+    font-size: 2rem;
+    font-weight: 700;
+`;
+
+export default App;

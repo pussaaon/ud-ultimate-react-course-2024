@@ -1,5 +1,14 @@
 # Packages Install
 
+```bash
+npm i styled-components
+
+```
+
+# Extensions Install
+
+-   vscode-styled-components by Styled Components
+
 # The Project: The Wild OASIS
 
 1. Internal Hotel Management App
@@ -22,3 +31,25 @@
 ## Tech Decisions
 
 ![](/figures/part4-wild-oasis-project-tech-decisions.png)
+
+# Styled Components
+
+-   Declare a react component which extend from basic HTML elements or composed from another component.
+-   Apply vanilla CSS inside the styled tag template literal from ES6.
+
+## Apply Global Styles In Styled Components Way
+
+-   Create and export a component that contains all global styles using createGlobalStyle``
+-   Apply to a UI component by adding the global styled component as an sibling.
+-   The GlobalStyle component can't accept any children.
+
+```jsx
+return (
+	<>
+		<GlobalStyles />
+		<Container>
+			...
+		</Container>
+	</Container>
+)
+```
