@@ -3,6 +3,7 @@
 ```bash
 npm i styled-components
 npm i react-router-dom@6
+npm i react-icons
 ```
 
 # Extensions Install
