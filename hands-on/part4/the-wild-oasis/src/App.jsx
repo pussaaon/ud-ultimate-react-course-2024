@@ -3,24 +3,31 @@ import GlobalStyles from "./styles/GlobalStyles";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Heading from "./ui/Heading";
+import RowLayout from "./ui/RowLayout";
 
 function App() {
     return (
         <>
             <GlobalStyles />
-            <div>
-                <Heading as="h2">The Wild Oasis</Heading>
-                <Button>Check in</Button>
-                <Button>Check out</Button>
-                <Input placeholder="Search" />
-            </div>
+            <RowLayout type="horizontal">
+                <Heading as="h1">The Wild Oasis</Heading>
+                <div>
+                    <Heading as="h2">Check in and out:</Heading>
+                    <Button>Check in</Button>
+                    <Button variation="secondary" size="small">
+                        Check out
+                    </Button>
+                </div>
+            </RowLayout>
+            <RowLayout>
+                <Heading as="h2">Form</Heading>
+                <form>
+                    <Input placeholder="Number of guests" />
+                    <Input placeholder="Number of guests" />
+                </form>
+            </RowLayout>
         </>
     );
 }
-
-const Headline = styled.h1`
-    font-size: 2rem;
-    font-weight: 700;
-`;
 
 export default App;
