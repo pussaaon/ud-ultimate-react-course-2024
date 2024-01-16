@@ -36,6 +36,7 @@ npm i styled-components
 
 -   Declare a react component which extend from basic HTML elements or composed from another component.
 -   Apply vanilla CSS inside the styled tag template literal from ES6.
+-   Use '&' to refer to the future defined className in the css code.
 
 ## Apply Global Styles In Styled Components Way
 
@@ -52,4 +53,51 @@ return (
 		</Container>
 	</Container>
 )
+```
+
+## CSS Function and Prop
+
+-   Can be used to conditionally override based html element and css code.
+
+```js
+const Heading = styled.h1`
+    ${(props) =>
+        props.as === "h1" &&
+        css`
+            font-size: 3rem;
+            font-weight: 600;
+        `}
+
+    ${(props) =>
+        props.as === "h2" &&
+        css`
+            font-size: 2rem;
+            font-weight: 600;
+        `}
+`;
+```
+
+```js
+const template = css`
+    font-size: 2rem;
+    font-weight: 600;
+`;
+
+const Heading = styled.h1`
+    ${template}
+`;
+```
+
+### The 'as' prop
+
+-   Used to override based html element when creating the styled component.
+
+```jsx
+<Heading as="h2"></Heading>
+```
+
+-   This will produce html result as follow
+
+```html
+<h2></h2>
 ```
