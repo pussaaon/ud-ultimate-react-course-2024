@@ -5,6 +5,7 @@ npm i @tanstack/react-query@4
 npm i @tanstack/react-query-devtools@4
 npm i date-fns
 npm i react-hot-toast
+npm i react-hook-form@7
 ```
 
 # Section Topics
