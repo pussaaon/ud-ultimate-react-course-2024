@@ -86,6 +86,7 @@ function CreateCabinForm({ cabinToEdit }) {
     const isProcessing = isCreating || isUpdating;
 
     function onSubmit(data) {
+        // image's value string type means using the old image for updating.
         const image =
             typeof data.image === "string" ? data.image : data.image[0];
         if (isEditMode) {
