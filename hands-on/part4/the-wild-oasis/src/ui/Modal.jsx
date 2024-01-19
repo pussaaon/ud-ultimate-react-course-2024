@@ -1,4 +1,11 @@
-import { cloneElement, createContext, useContext, useState } from "react";
+import {
+    cloneElement,
+    createContext,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
@@ -75,12 +82,24 @@ function Opener({ children, modalName }) {
 
 function Window({ children, name }) {
     const { modalName, close } = useContext(ModalContext);
+    const modalRef = useRef();
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (modalRef.current && !modalRef.current.contains(e.target)) {
+                close();
+            }
+        }
+        document.addEventListener("click", handleClickOutside, true);
+        return () =>
+            document.removeEventListener("click", handleClickOutside, true);
+    }, [close]);
 
     if (name !== modalName) return null;
 
     return createPortal(
         <Overlay>
-            <StyledModal>
+            <StyledModal ref={modalRef}>
                 <Button onClick={close}>
                     <HiXMark />
                 </Button>
