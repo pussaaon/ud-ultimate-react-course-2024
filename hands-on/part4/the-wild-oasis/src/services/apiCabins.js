@@ -14,15 +14,20 @@ async function getCabins() {
 function buildImageNamePath(name) {
     const imageName = `${Math.random()}-${name}`.replaceAll("/", "");
     const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
-    return { imageName, imagePath };
+    const useOldImage = name.startsWith?.(supabaseUrl);
+    return { imageName, imagePath, useOldImage };
 }
 
 async function createCabin(newCabin) {
-    const { imageName, imagePath } = buildImageNamePath(newCabin.image.name);
+    const { imageName, imagePath, useOldImage } = buildImageNamePath(
+        newCabin.image.name ?? newCabin.image
+    );
 
     const { data, error } = await supabase
         .from("cabins")
-        .insert([{ ...newCabin, image: imagePath }]);
+        .insert([
+            { ...newCabin, image: useOldImage ? newCabin.image : imagePath },
+        ]);
 
     if (error) {
         console.log(error);
@@ -30,24 +35,27 @@ async function createCabin(newCabin) {
     }
 
     // upload cabin image
-    const { error: storageError } = await supabase.storage
-        .from("cabin-images")
-        .upload(imageName, newCabin.image);
+    if (!useOldImage) {
+        const { error: storageError } = await supabase.storage
+            .from("cabin-images")
+            .upload(imageName, newCabin.image);
 
-    if (storageError) {
-        await supabase.from("cabins").delete().eq("id", data.id);
-        console.log(storageError);
-        throw new Error(
-            "Cabin image could not be uploaded and the cabin was not created."
-        );
+        if (storageError) {
+            await supabase.from("cabins").delete().eq("id", data.id);
+            console.log(storageError);
+            throw new Error(
+                "Cabin image could not be uploaded and the cabin was not created."
+            );
+        }
     }
 
     return data;
 }
 
 async function updateCabin(cabin, id) {
-    const useOldImage = cabin.image?.startsWith?.(supabaseUrl);
-    const { imageName, imagePath } = buildImageNamePath(cabin.image.name);
+    const { imageName, imagePath, useOldImage } = buildImageNamePath(
+        cabin.image.name ?? cabin.image
+    );
 
     const { data, error } = await supabase
         .from("cabins")
