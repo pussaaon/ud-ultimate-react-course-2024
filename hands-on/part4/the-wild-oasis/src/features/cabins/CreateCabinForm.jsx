@@ -6,9 +6,8 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
-import { createCabin, updateCabin } from "../../services/apiCabins";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
+import useCreateCabin from "./hooks/useCreateCabin";
+import useUpdateCabin from "./hooks/useUpdateCabin";
 
 const FormRow = styled.div`
     display: grid;
@@ -54,34 +53,8 @@ function CreateCabinForm({ cabinToEdit }) {
     });
     const { errors } = formState;
 
-    const queryClient = useQueryClient();
-
-    const { mutate: mtCreateCabin, isLoading: isCreating } = useMutation({
-        mutationFn: createCabin,
-        onSuccess: () => {
-            toast.success("Cabin is successfully created.");
-            queryClient.invalidateQueries({
-                queryKey: ["cabins"],
-            });
-            reset();
-        },
-        onError: (err) => {
-            toast.error(err.message);
-        },
-    });
-
-    const { mutate: mtEditCabin, isLoading: isUpdating } = useMutation({
-        mutationFn: ({ cabin, id }) => updateCabin(cabin, id),
-        onSuccess: () => {
-            toast.success("Cabin is successfully updated.");
-            queryClient.invalidateQueries({
-                queryKey: ["cabins"],
-            });
-        },
-        onError: (err) => {
-            toast.error(err.message);
-        },
-    });
+    const { createCabin, isCreating } = useCreateCabin();
+    const { updateCabin, isUpdating } = useUpdateCabin();
 
     const isProcessing = isCreating || isUpdating;
 
@@ -90,9 +63,17 @@ function CreateCabinForm({ cabinToEdit }) {
         const image =
             typeof data.image === "string" ? data.image : data.image[0];
         if (isEditMode) {
-            mtEditCabin({ cabin: { ...data, image: image }, id: editId });
+            updateCabin({ cabin: { ...data, image: image }, id: editId });
         } else {
-            mtCreateCabin({ ...data, image: image });
+            createCabin(
+                { ...data, image: image },
+                {
+                    onSuccess: (data) => {
+                        console.log(data);
+                        reset();
+                    },
+                }
+            );
         }
     }
 
@@ -158,9 +139,12 @@ function CreateCabinForm({ cabinToEdit }) {
                     disabled={isCreating}
                     {...register("discount", {
                         required: "This field is required.",
-                        validate: (value) =>
-                            value <= getValues().regularPrice ||
-                            "Discount should be less than regular price.",
+                        validate: (value) => {
+                            return (
+                                Number(value) <= getValues().regularPrice ||
+                                "Discount should be less than regular price."
+                            );
+                        },
                     })}
                 />
                 {errors?.discount?.message && (
