@@ -128,7 +128,7 @@ function Button({ children, onClick, disable }) {
 
     return (
         <li>
-            <StyledButton disable={disable} onClick={handleClick}>
+            <StyledButton disabled={disable} onClick={handleClick}>
                 {children}
             </StyledButton>
         </li>
