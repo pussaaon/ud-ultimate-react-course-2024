@@ -11,7 +11,6 @@ function CabinTable() {
     if (isLoading) return <Spinner />;
 
     const filterValue = searchParams.get("discount") || "all";
-
     let filterCabins;
     switch (filterValue) {
         case "all":
@@ -24,6 +23,15 @@ function CabinTable() {
             filterCabins = cabins.filter((cabin) => cabin.discount > 0);
             break;
     }
+
+    const sortValue = searchParams.get("sort") || "name-asc";
+    const [column, direction] = sortValue.split("-");
+    const sortModifier = direction === "asc" ? 1 : -1;
+    filterCabins = filterCabins.sort((a, b) =>
+        column === "name"
+            ? a[column].localeCompare(b[column]) * sortModifier
+            : (a[column] - b[column]) * sortModifier
+    );
 
     return (
         <Table columnsWidth="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
