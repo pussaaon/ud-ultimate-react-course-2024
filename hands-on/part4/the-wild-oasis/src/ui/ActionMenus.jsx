@@ -1,10 +1,10 @@
-import { cloneElement, createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import styled from "styled-components";
 
-const MenuLayout = styled.div`
+const StyledActionMenus = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -78,7 +78,7 @@ function ActionMenus({ children }) {
         <ActionMenusContext.Provider
             value={{ activeId, close, open, position, setPosition }}
         >
-            {children}
+            <StyledActionMenus>{children}</StyledActionMenus>
         </ActionMenusContext.Provider>
     );
 }
@@ -135,7 +135,6 @@ function Button({ children, onClick, disable }) {
     );
 }
 
-ActionMenus.MenuLayout = MenuLayout;
 ActionMenus.Toggle = Toggle;
 ActionMenus.List = List;
 ActionMenus.Button = Button;
