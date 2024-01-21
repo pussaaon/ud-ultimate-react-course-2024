@@ -6,7 +6,7 @@ import Table from "../../ui/Table";
 import ActionMenus from "../../ui/ActionMenus";
 
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
-import { HiEye } from "react-icons/hi2";
+import { HiArrowDownOnSquare, HiEye } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 const Cabin = styled.div`
@@ -91,6 +91,11 @@ function BookingRow({
                         onClick={() => navigate(`/bookings/${bookingId}`)}
                     >
                         <HiEye /> <span>See details</span>
+                    </ActionMenus.Button>
+                    <ActionMenus.Button
+                        onClick={() => navigate(`/checkin/${bookingId}`)}
+                    >
+                        <HiArrowDownOnSquare /> <span>Check in</span>
                     </ActionMenus.Button>
                 </ActionMenus.List>
             </ActionMenus>
