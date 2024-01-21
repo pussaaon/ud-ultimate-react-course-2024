@@ -6,7 +6,7 @@ import Empty from "../../ui/Empty";
 import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
-    const { isLoading, bookings } = useBookings();
+    const { isLoading, bookings, count } = useBookings();
 
     if (isLoading) return <Spinner />;
     if (!bookings.length) return <Empty resource={"bookings"} />;
@@ -29,7 +29,7 @@ function BookingTable() {
                 )}
             />
             <Table.Footer>
-                <Pagination total_rows={bookings.length} />
+                <Pagination total_rows={count} />
             </Table.Footer>
         </Table>
     );

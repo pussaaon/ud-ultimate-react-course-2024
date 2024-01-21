@@ -14,16 +14,20 @@ function useBookings() {
     const [field, direction] = sortByValue.split("-");
     const sortBy = { field, direction };
 
+    const page = searchParams.get("page")
+        ? Number(searchParams.get("page"))
+        : 1;
+
     const {
         isLoading,
         error,
-        data: bookings,
+        data: { data: bookings, count } = {},
     } = useQuery({
-        queryFn: () => getBookings(filter, sortBy),
-        queryKey: ["bookings", filter, sortBy],
+        queryFn: () => getBookings(filter, sortBy, page),
+        queryKey: ["bookings", filter, sortBy, page],
     });
 
-    return { isLoading, error, bookings };
+    return { isLoading, error, bookings, count };
 }
 
 export default useBookings;
