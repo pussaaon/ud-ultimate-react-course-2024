@@ -35,19 +35,18 @@ const FilterButton = styled.button`
     }
 `;
 
-function Filter({ filterColumn, filterOptions }) {
+function Filter({ filterField, options }) {
     const [searchParams, setSearchParams] = useSearchParams();
-    const activeFilter =
-        searchParams.get(filterColumn) || filterOptions.at(0).value;
+    const activeFilter = searchParams.get(filterField) || options.at(0).value;
 
     function handleClick(value) {
-        searchParams.set(filterColumn, value);
+        searchParams.set(filterField, value);
         setSearchParams(searchParams);
     }
 
     return (
         <StyledFilter>
-            {filterOptions.map((option) => (
+            {options.map((option) => (
                 <FilterButton
                     key={option.value}
                     onClick={() => handleClick(option.value)}

@@ -6,8 +6,8 @@ function CabinTableOperations() {
     return (
         <TableOperations>
             <Filter
-                filterColumn={"discount"}
-                filterOptions={[
+                filterField={"discount"}
+                options={[
                     { label: "All", value: "all" },
                     { label: "No discount", value: "no-discount" },
                     { label: "With discount", value: "with-discount" },
@@ -16,33 +16,27 @@ function CabinTableOperations() {
             <SortBy
                 options={[
                     {
-                        column: "name",
-                        direction: "asc",
+                        value: "name-asc",
                         label: "Sort by name (A-Z)",
                     },
                     {
-                        column: "name",
-                        direction: "desc",
+                        value: "name-desc",
                         label: "Sort by name (Z-A)",
                     },
                     {
-                        column: "regularPrice",
-                        direction: "asc",
+                        value: "regularPrice-asc",
                         label: "Sort by price (low to high)",
                     },
                     {
-                        column: "regularPrice",
-                        direction: "desc",
+                        value: "regularPrice-desc",
                         label: "Sort by price (high to low)",
                     },
                     {
-                        column: "maxCapacity",
-                        direction: "asc",
+                        value: "maxCapacity-asc",
                         label: "Sort by capacity (low to high)",
                     },
                     {
-                        column: "maxCapacity",
-                        direction: "desc",
+                        value: "maxCapacity-desc",
                         label: "Sort by capacity (high to low)",
                     },
                 ]}
