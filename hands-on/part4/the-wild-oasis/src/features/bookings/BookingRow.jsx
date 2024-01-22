@@ -6,7 +6,12 @@ import Table from "../../ui/Table";
 import ActionMenus from "../../ui/ActionMenus";
 
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
-import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from "react-icons/hi2";
+import {
+    HiArrowDownOnSquare,
+    HiArrowUpOnSquare,
+    HiEye,
+    HiTrash,
+} from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 import useCheckout from "../check-in-out/hooks/useCheckout";
@@ -112,8 +117,7 @@ function BookingRow({
 
                                 <Modal.Opener modalName="delete-booking">
                                     <ActionMenus.Button>
-                                        <HiArrowDownOnSquare />{" "}
-                                        <span>Delete</span>
+                                        <HiTrash /> <span>Delete</span>
                                     </ActionMenus.Button>
                                 </Modal.Opener>
                             </>
