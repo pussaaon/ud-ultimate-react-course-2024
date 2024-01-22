@@ -92,11 +92,13 @@ function BookingRow({
                     >
                         <HiEye /> <span>See details</span>
                     </ActionMenus.Button>
-                    <ActionMenus.Button
-                        onClick={() => navigate(`/checkin/${bookingId}`)}
-                    >
-                        <HiArrowDownOnSquare /> <span>Check in</span>
-                    </ActionMenus.Button>
+                    {status === "unconfirmed" && (
+                        <ActionMenus.Button
+                            onClick={() => navigate(`/checkin/${bookingId}`)}
+                        >
+                            <HiArrowDownOnSquare /> <span>Check in</span>
+                        </ActionMenus.Button>
+                    )}
                 </ActionMenus.List>
             </ActionMenus>
         </Table.Row>

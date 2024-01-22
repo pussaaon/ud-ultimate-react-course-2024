@@ -25,8 +25,6 @@ function BookingDetail() {
 
     const { isLoading, booking } = useBooking();
 
-    const status = "checked-in";
-
     const moveBack = useMoveBack();
     const navigate = useNavigate();
 
@@ -43,8 +41,8 @@ function BookingDetail() {
             <Row type="horizontal">
                 <HeadingGroup>
                     <Heading as="h1">Booking #{bookingId}</Heading>
-                    <Tag type={statusToTagName[status]}>
-                        {status.replace("-", " ")}
+                    <Tag type={statusToTagName[booking.status]}>
+                        {booking.status.replace("-", " ")}
                     </Tag>
                 </HeadingGroup>
                 <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
@@ -53,12 +51,14 @@ function BookingDetail() {
             <BookingDataBox booking={booking} />
 
             <ButtonGroup>
-                <Button
-                    variation="primary"
-                    onClick={() => navigate(`/checkin/${bookingId}`)}
-                >
-                    <HiArrowDownOnSquare /> <span>Check in</span>
-                </Button>
+                {booking.status === "unconfirmed" && (
+                    <Button
+                        variation="primary"
+                        onClick={() => navigate(`/checkin/${bookingId}`)}
+                    >
+                        <HiArrowDownOnSquare /> <span>Check in</span>
+                    </Button>
+                )}
                 <Button variation="secondary" onClick={moveBack}>
                     Back
                 </Button>
