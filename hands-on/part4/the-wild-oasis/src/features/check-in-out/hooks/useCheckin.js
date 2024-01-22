@@ -6,16 +6,20 @@ import { useNavigate } from "react-router-dom";
 function useCheckin() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+    let id;
     const { mutate: checkin, isLoading: isCheckingIn } = useMutation({
-        mutationFn: (bookingId) =>
-            updateBooking(bookingId, {
+        mutationFn: ({ bookingId, breakfast }) => {
+            id = bookingId;
+            updateBooking(id, {
                 status: "checked-in",
                 isPaid: true,
-            }),
+                ...breakfast,
+            });
+        },
         onSuccess: (data) => {
-            toast.success(`Booking #${data.id} successfully checked-in.`);
+            toast.success(`Booking #${id} successfully checked-in.`);
             queryClient.invalidateQueries({ active: true });
-            navigate(`/bookings/${data.id}`);
+            navigate(`/bookings/${id}`);
         },
         onError: (error) => {
             console.log(error);
