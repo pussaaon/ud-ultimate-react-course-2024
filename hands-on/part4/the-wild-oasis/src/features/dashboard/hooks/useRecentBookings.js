@@ -6,16 +6,16 @@ import { useQuery } from "@tanstack/react-query";
 export function useRecentBookings() {
     const [searchParams] = useSearchParams();
 
-    const numLastDays = !searchParams.get("last")
+    const numPastDays = !searchParams.get("last")
         ? 7
         : Number(searchParams.get("last"));
 
-    const queryDate = subDays(new Date(), numLastDays).toISOString();
+    const queryDate = subDays(new Date(), numPastDays).toISOString();
 
     const { isLoading, data: bookings } = useQuery({
         queryFn: () => getBookingsAfterDate(queryDate),
-        queryKey: ["report-bookings", `last-${numLastDays}`],
+        queryKey: ["report-bookings", `last-${numPastDays}`],
     });
 
-    return { isLoading, bookings, numLastDays };
+    return { isLoading, bookings, numPastDays };
 }
