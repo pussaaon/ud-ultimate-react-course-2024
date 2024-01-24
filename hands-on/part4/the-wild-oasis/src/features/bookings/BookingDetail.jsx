@@ -9,6 +9,7 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
 import Modal from "../../ui/Modal";
+import Empty from "../../ui/Empty";
 import useBooking from "./hooks/useBooking";
 import useCheckout from "../check-in-out/hooks/useCheckout";
 import {
@@ -45,6 +46,7 @@ function BookingDetail() {
     };
 
     if (isLoading) return <Spinner />;
+    if (!booking) return <Empty resourceName="booking" />;
 
     return (
         <>
