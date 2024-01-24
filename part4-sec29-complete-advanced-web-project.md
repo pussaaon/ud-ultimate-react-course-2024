@@ -1,6 +1,7 @@
 # Packages Install
 
 ```bash
+npm i react-error-boundary
 
 ```
 
